@@ -6,7 +6,12 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1
 
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --upgrade pip \
+        --trusted-host pypi.org \
+        --trusted-host files.pythonhosted.org && \
+    pip install -r requirements.txt \
+        --trusted-host pypi.org \
+        --trusted-host files.pythonhosted.org
 
 COPY app ./app
 
